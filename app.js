@@ -20,7 +20,26 @@ const user = {
     ]
 }
 
+const collections = [{},
+    15,
+    "hello@test.pl",
+    null,
+    ['aaa', 'bbb', 5],
+    'admin@gmail.com',
+    undefined,
+    'a34@yahoo.com',
+    '321@a',
+    '321.pl'
+];
+
+const reg = /^[-\w\.]+@([-\w]+\.)+[a-z]+$/i;
+
 let tablica = [1, 2, 3, 4, 5];
+let subjectWeightOne = _.find(user.allGrades, function (o) {
+    if (o.weight === 1) {
+        return o;
+    }
+}).subjectName;
 
 console.log(_.mean(tablica));
 console.log(_.min(tablica));
@@ -35,8 +54,16 @@ function printUser(user) {
     }, 0))
 
     console.log(user.name + ' ' + user.surname + ': ' + avgUser);
-
-    console.log(
-
-    );
 }
+
+console.log(subjectWeightOne);
+
+
+function getMails(args) {
+    let tabString = _.filter(args, function (o) {
+        return _.isString(o) && reg.test(o);
+    });
+    return tabString;
+}
+
+console.log(getMails(collections));
